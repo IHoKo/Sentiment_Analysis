@@ -12,9 +12,12 @@ Sentiment_Analysis/
 │   └── event_nlp_sentiment_analysis.csv
 ├── Script/
 │   ├── nlp_sentiment_analysis.ipynb
+│   ├── sentiment_methods.py
 │   ├── sentiment_analysis.ipynb
 │   ├── sentiment_analysis.py
 │   └── sentiment_analysis_plots.ipynb
+├── streamlit_app.py
+├── requirements.txt
 └── README.md
 ```
 
@@ -159,6 +162,48 @@ Charts included:
 - Distribution of sentiment scores
 - Sentiment score vs. registration count
 
+## Streamlit App
+
+`streamlit_app.py` provides an interactive user interface for comparing the two sentiment methods without editing notebooks.
+
+The app supports:
+
+- Reviewing the existing dataset with both rule-based and VADER NLP scores
+- Entering a new event request manually
+- Running both sentiment methods on the new entry
+- Comparing scores, labels, and reasons side by side
+- Viewing Plotly charts for method-level comparison
+
+The app uses shared scoring functions from `Script/sentiment_methods.py`, so the logic is reusable outside the notebooks.
+
+### App Tabs
+
+The Streamlit app has three main tabs:
+
+- `New Entry`: enter a new event request and compare rule-based vs. VADER NLP sentiment results.
+- `Dataset Comparison`: inspect existing dataset rows with both method outputs side by side.
+- `Charts`: view interactive Plotly charts comparing scores, labels, and agreement patterns.
+
+### Run The App
+
+Install dependencies:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+Run the app from the project root:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Then open the local Streamlit URL shown in the terminal, usually:
+
+```text
+http://localhost:8501
+```
+
 ## Python Script
 
 `Script/sentiment_analysis.py` contains the same core sentiment logic in script form. It can be run from the project root:
@@ -180,15 +225,22 @@ The project uses:
 - `pandas`
 - `plotly`
 - `vaderSentiment`
+- `streamlit`
 - `jupyter`
 - `nbformat`
 - `nbclient`
 - `nbconvert`
 
-Install the required packages if needed:
+Install the required packages with:
 
 ```bash
-python3 -m pip install pandas plotly vaderSentiment jupyter nbformat nbclient nbconvert
+python3 -m pip install -r requirements.txt
+```
+
+Or install them manually:
+
+```bash
+python3 -m pip install pandas plotly vaderSentiment streamlit jupyter nbformat nbclient nbconvert
 ```
 
 ## How To View The Results
@@ -196,7 +248,8 @@ python3 -m pip install pandas plotly vaderSentiment jupyter nbformat nbclient nb
 1. Open `Script/sentiment_analysis.ipynb` to see the data loading and scoring workflow.
 2. Open `Script/nlp_sentiment_analysis.ipynb` to see the NLP-based VADER sentiment workflow.
 3. Open `Script/sentiment_analysis_plots.ipynb` to see the interactive Plotly charts for the rule-based results.
-4. Open `Data/event_sentiment_analysis.csv` or `Data/event_nlp_sentiment_analysis.csv` to inspect the enriched datasets.
+4. Run `streamlit run streamlit_app.py` to compare both methods for existing events and new user-entered events.
+5. Open `Data/event_sentiment_analysis.csv` or `Data/event_nlp_sentiment_analysis.csv` to inspect the enriched datasets.
 
 If the notebook view in VS Code looks stale, close the notebook tab and reopen the file from the Explorer.
 

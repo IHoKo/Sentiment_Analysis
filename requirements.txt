@@ -1,0 +1,8 @@
+pandas
+plotly
+streamlit
+vaderSentiment
+jupyter
+nbformat
+nbclient
+nbconvert
